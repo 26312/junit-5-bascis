@@ -1,0 +1,12 @@
+Test Life Cylce
+
+Processs in which test instances are created, managed and destroyed.
+Unlike other classes
+
+Junit gives hooks and gives the opportunity to execute code in that lifecycle
+
+LifeCycle Hooks:
+- @BeforeAll
+- @AfterAll
+- @BeforEach
+- @AfterEach
