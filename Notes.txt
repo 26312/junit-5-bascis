@@ -5,8 +5,76 @@ Unlike other classes
 
 Junit gives hooks and gives the opportunity to execute code in that lifecycle
 
+JUnit creates new class instance for every test run and for every method run
+
 LifeCycle Hooks:
 - @BeforeAll
 - @AfterAll
 - @BeforEach
 - @AfterEach
+
+The annotations @BeforeAll & @AfterAll are executed even before the instance is created.
+
+The methods which are annotated with @BeforeAll & @AfterAll must be defined as "static".
+
+This is because these annotations (@BeforeAll & @AfterAll), causes the framework to execute the annotated methods
+even before the instance of the class is executed.
+
+This is pratically impossible becuase JUnit does not have the class to run that method.
+
+Therefore, there are restricitions to run the annotations (@BeforeAll & @AfterAll).
+Hence, the methods annotated with (@BeforeAll & @AfterAll) must be defined as static.
+
+This is the only way to let the framework know to execute the corresponding methods even before the.
+
+
+TEST INSTANCE:
+
+In testing, every method creates a new instance for the class it is testing.
+What if we want only one instance for all the methods.
+
+We can change this behaviour, using "Test Instance", i.e. new instance is created per test
+
+This can be done by declaring annotations "@TestInstance" over the class.
+The annotation has 2 options
+
+1.TestInstance.Lifecycle.PER_CLASS
+2.TestInstance.Lifecycle.PER_METHOD (DEFAULT)
+
+ANNOTATIONS TO SCALE OUR TESTS:
+There are couple of other annotations which allows users to scale their tests and handle the development process.
+
+1. @DistplayName ->  It is annotated over methods being tested.
+                     It is a visual display of what exactly the test method is doing.
+                     Comes in handy incase of errors which allows users to view what the method is doing.
+
+2. @Disabled -> Mostly used when users are perfroming Test Driven Development (TDD)
+                Allows to disable the method which is not in use or would fail.
+                Comes in handy when a test for the method is not yet created.
+
+
+CONDITIONAL EXECUTION:
+It is a way to execute test only on certain situations or scenarios
+
+@EnabledOnOs(OS.LINUX) -> Declare it over a test class and that class will execute over that particular OS alone
+
+@EnabledOnJre(JRE.JAVA_11) -> Declare it over a test class to be used against a particular Java version. Based on language features.
+
+Following are other annotations which allows user's to control from outside what test we want to execute and under what time & conditions
+@EnabledIf
+@EnabledIfSystemProperty
+@EnabledIfEnvironmentVariable
+
+HANDLING EXTERNAL FACTORS:
+External factors can be utilized using assumptions
+
+assumeTrue() -> Pass
+                This method tells Junit that, if what I assume is False, then don't run this test becuase the test doesn't make
+                sense in that context.
+                Unlike Enabled,Disabled, this method gives users a programmable control.
+
+
+ASSERTALL
+
+assertAll is a mechanism to run a bunch of assertions in one statements.
+This allows users to pass in multple inputs which they wish to test against their
